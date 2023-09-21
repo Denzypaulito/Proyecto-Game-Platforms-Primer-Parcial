@@ -1,0 +1,398 @@
+[gd_scene load_steps=21 format=3 uid="uid://cw6lc6kwaw2a5"]
+
+[ext_resource type="Texture2D" uid="uid://c2pva55h8cw52" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="2_hkhcu"]
+[ext_resource type="Texture2D" uid="uid://b7s37jopfxavc" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button.png" id="2_l7s5u"]
+[ext_resource type="FontFile" uid="uid://dslqhw572mss2" path="res://Oswald/Pixeboy-z8XGD.ttf" id="2_w035w"]
+[ext_resource type="Texture2D" uid="uid://dtpy5lfdtyn6k" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/knight_idle_anim_f5.png" id="3_hftr2"]
+[ext_resource type="Texture2D" uid="uid://qqrpsmmnobao" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button_press.png" id="3_rdqrv"]
+[ext_resource type="Texture2D" uid="uid://cpw0kb28p4dsu" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/Red Bar.png" id="4_tlgrl"]
+[ext_resource type="Texture2D" uid="uid://ceudps6nn6ygc" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/health_ui.png" id="5_7pgt8"]
+[ext_resource type="Texture2D" uid="uid://vgiqg81afh5n" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/Volume.png" id="5_fbk1v"]
+[ext_resource type="Texture2D" uid="uid://bbpq5ppsn3tbx" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/Volume Mute.png" id="6_84kxj"]
+[ext_resource type="Texture2D" uid="uid://bi4l7pefn8vvd" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button_press.png" id="7_lxab6"]
+[ext_resource type="AudioStream" uid="uid://nkc47tftefld" path="res://Oswald/Gracefully.mp3" id="8_66qnc"]
+[ext_resource type="AudioStream" uid="uid://daev57jgsk1g6" path="res://Oswald/In Your Past.mp3" id="9_p448e"]
+[ext_resource type="AudioStream" uid="uid://dfxlt42ex5xlw" path="res://Oswald/SlimeDead.mp3" id="10_6tr0r"]
+
+[sub_resource type="GDScript" id="GDScript_50nh0"]
+script/source = "extends Node2D
+
+@export var max_health = 10
+
+var health = max_health
+var score  = 0
+var level  = 0
+
+var time = 10000000000
+var is_paused = false
+var no_mute = true
+var enemies_kill = 0
+func _ready():
+	$CanvasLayer/LiveBar2.max_value = health
+
+#func _input(event):
+	#if event.is_action_pressed(\"ui_cancel\"):
+		#if is_paused:
+			#resume_game()
+		#else:
+			#pause_game()
+
+func on_player_death():
+	$Song.stop()
+	$Die.play()
+	is_paused = true
+	get_tree().paused = true
+	$CanvasLayer3.show()
+	health = max_health
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if not is_paused:
+		time -= delta
+		$CanvasLayer/lives.text = \"LIVES: \" + str(health)
+		$CanvasLayer/score.text = \"SCORE: \" + str(score)
+		$CanvasLayer/level.text = \"LEVEL: \" + str(level)
+		$CanvasLayer/time.text  = \"TIME: \" + str(round(time))
+		$CanvasLayer/LiveBar2.value = health
+		if time <= 0:
+			on_player_death()
+		var total_enemies = LevelManager.getTotalEnemiesInLevel()
+		$CanvasLayer/Enemies.text = \"Enemies \" + str(enemies_kill) + \"/\" + str(total_enemies)
+	
+
+func increment_enemy_kills():
+	enemies_kill += 1
+
+func reset_enemy_kills():
+	enemies_kill = 0
+	
+func pause_game():
+	is_paused = true
+	get_tree().paused = true
+	$CanvasLayer.hide()
+	$CanvasLayer2.show() 
+
+func resume_game():
+	is_paused = false
+	get_tree().paused = false
+	$CanvasLayer.show()
+	$CanvasLayer2.hide()
+
+
+func _on_button_pressed():
+	resume_game()
+	$CanvasLayer3.hide()
+	time = 60
+	$Die.stop()
+	$Song.play()
+	LevelManager.loadFirstLevel()
+	
+func _on_button_pressed2():
+	resume_game()
+	$CanvasLayer3.hide()
+	time = 60
+	$Die.stop()
+	$Song.play()
+	get_tree().reload_current_scene()
+	
+	
+
+func _on_continue_button_pressed():
+	resume_game()
+
+
+func _on_pause_button_pressed():
+	pause_game()
+
+
+func _on_mute_button_pressed():
+	if not no_mute:
+		no_mute = true
+		$\"CanvasLayer2/Mute Button\".texture_normal = preload(\"res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/Volume.png\")  
+		$Song.volume_db = 0  
+		
+	else:
+		no_mute = false
+		$\"CanvasLayer2/Mute Button\".texture_normal = preload(\"res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/Volume Mute.png\")  # Cambia la textura a la versión silenciada
+		$Song.volume_db = -80 
+
+func on_score():
+	score += 10
+	
+func slime_dead():
+	$SlimeDead.play()
+	
+func player_pickup_potion():
+	health = 10
+
+
+ 
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_nidhn"]
+font = ExtResource("2_w035w")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_e8l2t"]
+font = ExtResource("2_w035w")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_cbidm"]
+font = ExtResource("2_w035w")
+font_size = 50
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b7y53"]
+font = ExtResource("2_w035w")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_uejye"]
+font = ExtResource("2_w035w")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_50nep"]
+font = ExtResource("2_w035w")
+font_size = 50
+
+[node name="Score" type="Node2D"]
+process_mode = 3
+script = SubResource("GDScript_50nh0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="score" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(1152, 648)
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 1142.0
+offset_bottom = 638.0
+text = "SCORE: 0"
+label_settings = SubResource("LabelSettings_nidhn")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="lives" type="Label" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(1152, 648)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1163.0
+offset_bottom = 658.0
+text = "LIVES: 0
+"
+label_settings = SubResource("LabelSettings_e8l2t")
+
+[node name="level" type="Label" parent="CanvasLayer"]
+visibility_layer = 33
+custom_minimum_size = Vector2(1152, 648)
+offset_left = -10.0
+offset_top = 10.0
+offset_right = 1142.0
+offset_bottom = 658.0
+text = "LEVEL: 0
+"
+label_settings = SubResource("LabelSettings_cbidm")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="time" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = -10.0
+offset_right = 1162.0
+offset_bottom = 638.0
+text = "TIME: 0"
+label_settings = SubResource("LabelSettings_b7y53")
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseButton" type="TextureButton" parent="CanvasLayer"]
+texture_filter = 3
+offset_left = 1064.0
+offset_top = 52.0
+offset_right = 1131.0
+offset_bottom = 119.0
+texture_normal = ExtResource("2_l7s5u")
+texture_pressed = ExtResource("3_rdqrv")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="LiveBar2" type="TextureProgressBar" parent="CanvasLayer"]
+texture_filter = 3
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 504.0
+offset_bottom = 99.0
+max_value = 10.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+texture_over = ExtResource("5_7pgt8")
+texture_progress = ExtResource("4_tlgrl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Enemies" type="Label" parent="CanvasLayer"]
+offset_right = 1155.0
+offset_bottom = 641.0
+text = "Enemies 0/0"
+label_settings = SubResource("LabelSettings_uejye")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.952941, 0.541176, 0.290196, 0.270588)
+
+[node name="ContinueButton" type="TextureButton" parent="CanvasLayer2"]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = 96.0
+offset_right = 115.5
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_hkhcu")
+texture_pressed = ExtResource("7_lxab6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer2/ContinueButton"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 50
+text = "CONTINUE"
+label_settings = SubResource("LabelSettings_50nep")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mute Button" type="TextureButton" parent="CanvasLayer2"]
+process_mode = 3
+texture_filter = 3
+layout_direction = 2
+offset_left = 515.0
+offset_top = 300.0
+offset_right = 1795.0
+offset_bottom = 1580.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("5_fbk1v")
+texture_pressed = ExtResource("6_84kxj")
+stretch_mode = 0
+
+[node name="RestartButton" type="TextureButton" parent="CanvasLayer2"]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -114.0
+offset_right = 115.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_hkhcu")
+texture_pressed = ExtResource("7_lxab6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer2/RestartButton"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 50
+text = "restart"
+label_settings = SubResource("LabelSettings_50nep")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer3"]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="HeroDie" type="Sprite2D" parent="CanvasLayer3"]
+texture_filter = 3
+position = Vector2(593, 309)
+rotation = -1.5708
+scale = Vector2(23.0178, 23.0178)
+texture = ExtResource("3_hftr2")
+
+[node name="Died" type="Label" parent="CanvasLayer3"]
+custom_minimum_size = Vector2(1152, 648)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_top = 50.0
+offset_right = 576.0
+offset_bottom = 698.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.671875, 0.195313, 0.195313, 1)
+theme_override_fonts/font = ExtResource("2_w035w")
+theme_override_font_sizes/font_size = 200
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="ContinueButton2" type="TextureButton" parent="CanvasLayer3"]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = 116.0
+offset_right = 115.5
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_hkhcu")
+texture_pressed = ExtResource("7_lxab6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer3/ContinueButton2"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 50
+text = "CONTINUE"
+label_settings = SubResource("LabelSettings_50nep")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Song" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_66qnc")
+volume_db = 12.0
+autoplay = true
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_p448e")
+volume_db = 12.0
+
+[node name="SlimeDead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_6tr0r")
+volume_db = 10.0
+
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Mute Button" to="." method="_on_mute_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/RestartButton" to="." method="_on_button_pressed2"]
+[connection signal="pressed" from="CanvasLayer3/ContinueButton2" to="." method="_on_button_pressed"]

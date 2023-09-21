@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddjlpmg6iti6r"]
+
+[ext_resource type="Texture2D" uid="uid://dtpy5lfdtyn6k" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/knight_idle_anim_f5.png" id="1_7ho5n"]
+[ext_resource type="FontFile" uid="uid://dslqhw572mss2" path="res://Oswald/Pixeboy-z8XGD.ttf" id="2_jlose"]
+[ext_resource type="Texture2D" uid="uid://c2pva55h8cw52" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="3_mu1b3"]
+[ext_resource type="Texture2D" uid="uid://bi4l7pefn8vvd" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button_press.png" id="4_8idgf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gk5wy"]
+font = ExtResource("2_jlose")
+font_size = 50
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer3"]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0.196078, 1)
+
+[node name="HeroDie" type="Sprite2D" parent="CanvasLayer3"]
+texture_filter = 3
+position = Vector2(593, 309)
+scale = Vector2(23.0178, 23.0178)
+texture = ExtResource("1_7ho5n")
+
+[node name="Died" type="Label" parent="CanvasLayer3"]
+custom_minimum_size = Vector2(1152, 648)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_top = 50.0
+offset_right = 576.0
+offset_bottom = 698.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.671875, 0.195313, 0.195313, 1)
+theme_override_fonts/font = ExtResource("2_jlose")
+theme_override_font_sizes/font_size = 200
+text = "you win"
+horizontal_alignment = 1
+
+[node name="ContinueButton2" type="TextureButton" parent="CanvasLayer3"]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = 116.0
+offset_right = 115.5
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_mu1b3")
+texture_pressed = ExtResource("4_8idgf")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer3/ContinueButton2"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+label_settings = SubResource("LabelSettings_gk5wy")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://3gikh8gokxr1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pa8s7"]
+
+[node name="Score" type="Node2D"]
+
+[node name="score" type="Label" parent="."]
+offset_right = 1149.0
+offset_bottom = 212.0
+text = "SCORE: 0"
+label_settings = SubResource("LabelSettings_pa8s7")
+
+[node name="score2" type="Label" parent="."]
+offset_right = 1151.0
+offset_bottom = 93.0
+text = "LIVES: 0"
+label_settings = SubResource("LabelSettings_pa8s7")
+horizontal_alignment = 1

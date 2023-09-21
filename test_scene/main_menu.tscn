@@ -1,0 +1,227 @@
+[gd_scene load_steps=18 format=3 uid="uid://cckap07hqjyel"]
+
+[ext_resource type="Texture2D" uid="uid://c2pva55h8cw52" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="1_12jv4"]
+[ext_resource type="Texture2D" uid="uid://c6igfhbst7tgc" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/enemies/slime/slime_idle_anim_f0.png" id="1_hvgin"]
+[ext_resource type="Texture2D" uid="uid://bi4l7pefn8vvd" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button_press.png" id="2_f3o8y"]
+[ext_resource type="FontFile" uid="uid://dslqhw572mss2" path="res://Oswald/Pixeboy-z8XGD.ttf" id="3_1kleg"]
+[ext_resource type="Texture2D" uid="uid://vgiqg81afh5n" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/Volume.png" id="4_2w5q6"]
+[ext_resource type="Texture2D" uid="uid://bbpq5ppsn3tbx" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/Volume Mute.png" id="5_v7epk"]
+[ext_resource type="Texture2D" uid="uid://b7s37jopfxavc" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button.png" id="7_l4il1"]
+[ext_resource type="Texture2D" uid="uid://qqrpsmmnobao" path="res://test_scene/assets/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button_press.png" id="8_oqcni"]
+[ext_resource type="TileSet" uid="uid://c67ll4gedlcw4" path="res://tilesetDefault.tres" id="9_3n8fv"]
+[ext_resource type="Script" path="res://test_scene/PlayButton.gd" id="9_ysel6"]
+[ext_resource type="Texture2D" uid="uid://brm4x6okgdsgt" path="res://EscudoUach.png" id="10_2uu1u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q60vl"]
+font = ExtResource("3_1kleg")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_g08mn"]
+font = ExtResource("3_1kleg")
+font_size = 50
+
+[sub_resource type="Image" id="Image_rwmqe"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 172, 50, 50, 255, 172, 50, 50, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 132, 126, 135, 255, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 132, 126, 135, 255, 132, 126, 135, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 132, 126, 135, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 155, 173, 183, 255, 155, 173, 183, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 155, 173, 183, 255, 155, 173, 183, 255, 255, 255, 255, 255, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 132, 126, 135, 255, 155, 173, 183, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 6, 6, 8, 255, 255, 255, 255, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 6, 6, 8, 255, 132, 126, 135, 255, 132, 126, 135, 255, 172, 50, 50, 255, 172, 50, 50, 255, 223, 113, 38, 255, 172, 50, 50, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 8, 255, 172, 50, 50, 255, 172, 50, 50, 255, 132, 126, 135, 255, 132, 126, 135, 255, 132, 126, 135, 255, 132, 126, 135, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 172, 50, 50, 255, 6, 6, 8, 255, 132, 126, 135, 255, 132, 126, 135, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 155, 173, 183, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 172, 50, 50, 255, 172, 50, 50, 255, 6, 6, 8, 255, 132, 126, 135, 255, 132, 126, 135, 255, 6, 6, 8, 255, 6, 6, 8, 255, 6, 6, 8, 255, 132, 126, 135, 255, 6, 6, 8, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 172, 50, 50, 255, 172, 50, 50, 255, 6, 6, 8, 255, 132, 126, 135, 255, 6, 6, 8, 255, 172, 50, 50, 255, 6, 6, 8, 255, 132, 126, 135, 255, 6, 6, 8, 255, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 6, 6, 8, 255, 6, 6, 8, 255, 0, 0, 0, 90, 0, 0, 0, 90, 6, 6, 8, 255, 6, 6, 8, 255, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_caj3f"]
+image = SubResource("Image_rwmqe")
+
+[sub_resource type="LabelSettings" id="LabelSettings_pq5c7"]
+font = ExtResource("3_1kleg")
+font_size = 150
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jekav"]
+font = ExtResource("3_1kleg")
+font_size = 30
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Node2D"]
+texture_filter = 3
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.0352941, 0, 0.176471, 0.87451)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2"]
+texture_filter = 3
+position = Vector2(139, 253)
+scale = Vector2(50.7812, 50.7812)
+texture = ExtResource("1_hvgin")
+
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer2"]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 164.0
+offset_top = 89.0
+offset_right = 395.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_12jv4")
+texture_pressed = ExtResource("2_f3o8y")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer2/ExitButton"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+label_settings = SubResource("LabelSettings_q60vl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mute Button" type="TextureButton" parent="CanvasLayer2"]
+process_mode = 3
+visible = false
+texture_filter = 3
+layout_direction = 2
+offset_left = 786.0
+offset_top = 269.0
+offset_right = 2066.0
+offset_bottom = 1549.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("4_2w5q6")
+texture_pressed = ExtResource("5_v7epk")
+stretch_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseButton" type="TextureButton" parent="CanvasLayer"]
+visible = false
+texture_filter = 3
+anchors_preset = -1
+anchor_left = -0.0381944
+anchor_bottom = 0.0679012
+offset_left = 1064.0
+offset_top = 18.0
+offset_right = 1131.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l4il1")
+texture_pressed = ExtResource("8_oqcni")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer"]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 167.0
+offset_top = 88.0
+offset_right = 398.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_12jv4")
+texture_pressed = ExtResource("2_f3o8y")
+stretch_mode = 5
+script = ExtResource("9_ysel6")
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayButton"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 231.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 50
+text = "Play
+"
+label_settings = SubResource("LabelSettings_g08mn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 3
+position = Vector2(323, 397)
+scale = Vector2(39.3457, 39.3457)
+texture = SubResource("ImageTexture_caj3f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 3
+position = Vector2(1061, 84)
+scale = Vector2(0.197388, 0.197388)
+texture = ExtResource("10_2uu1u")
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+offset_left = 565.0
+offset_top = 196.0
+offset_right = 1146.0
+offset_bottom = 374.0
+theme_override_font_sizes/font_size = 50
+text = "Darky 
+Dungeon 
+"
+label_settings = SubResource("LabelSettings_pq5c7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title2" type="Label" parent="CanvasLayer"]
+offset_left = -56.0
+offset_top = 459.0
+offset_right = 673.0
+offset_bottom = 652.0
+theme_override_font_sizes/font_size = 50
+text = "Denzel alexander Muñoz santana 348802
+
+facultad de ingenieria
+universidad autónoma de chihuahua 
+
+09/2023
+
+"
+label_settings = SubResource("LabelSettings_jekav")
+horizontal_alignment = 1
+
+[node name="Title3" type="Label" parent="CanvasLayer"]
+offset_left = 486.0
+offset_top = 512.0
+offset_right = 1215.0
+offset_bottom = 700.0
+theme_override_font_sizes/font_size = 50
+text = "game platforms 
+
+Maestro Alberto Pacheco Gonzalez 
+ingeniería en ciencias del computación 
+
+"
+label_settings = SubResource("LabelSettings_jekav")
+horizontal_alignment = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(14, 14)
+tile_set = ExtResource("9_3n8fv")
+format = 2
+layer_0/tile_data = PackedInt32Array(3, 393217, 4, 4, 393217, 4, 65539, 393217, 4, 65540, 393217, 4, 131075, 393217, 4, 131076, 393217, 4, 131074, 458753, 5, 65537, 524289, 5, 2, 393217, 5, 65538, 393217, 5, 1, 524289, 5, 0, 524289, 4, 65536, 524289, 4, 131073, 524289, 4, 131072, 524289, 4, 196607, 524289, 4, 131071, 524289, 4, 65535, 524289, 4, 131077, 458753, 4, 65541, 458753, 4, 5, 458753, 4)
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(65539, 262145, 1, 131076, 65537, 0)
+
+[connection signal="pressed" from="CanvasLayer2/ExitButton" to="CanvasLayer/PlayButton" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Mute Button" to="CanvasLayer/PlayButton" method="_on_mute_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="CanvasLayer/PlayButton" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_pressed"]
